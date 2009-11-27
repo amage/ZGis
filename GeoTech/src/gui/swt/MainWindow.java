@@ -84,7 +84,7 @@ public class MainWindow extends Composite implements ResManagerListener {
 		layers.add(new MapLayer(res, vport));
 		layers.add(new GeoGridLayer(res, vport));
 		layers.add(new LineObjectLayer(res, vport));
-		layers.add(new ObjectsLayer(res, vport));
+//		layers.add(new ObjectsLayer(res, vport));
 		layers.add(new TextLayer(res, vport));
 		layers.add(new GUILayer(res, vport));
 		
