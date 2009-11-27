@@ -1,0 +1,37 @@
+package model.qmap;
+
+import model.Rect;
+
+public class GoogleMapPathMaker extends PathMaker {
+	public String makePathFor(Rect cell, Rect start) {
+		String path = "t";
+		Rect r = new Rect(0,0,0,0);
+		
+		r.setSameGeometry(start);
+		
+		while(cell.haveOverlap(r) && r.getWidth() > cell.getWidth()) {
+			// 0 - q, 1 - r,  2 - t, 3 - s
+			Rect [] sl = r.newFourBySplit();
+			if(cell.haveOverlap(sl[0])) {
+				r.setSameGeometry(sl[0]);
+				path+="q";
+			}
+			else if(cell.haveOverlap(sl[1])) {
+				r.setSameGeometry(sl[1]);
+				path+="r";
+			}
+			else if(cell.haveOverlap(sl[2])) {
+				r.setSameGeometry(sl[2]);
+				path+="t";
+			}
+			else if(cell.haveOverlap(sl[3])) {
+				r.setSameGeometry(sl[3]);
+				path+="s";
+			} else {
+				System.out.println("error in: "+path);
+				return null;
+			}
+		}
+		return path;
+	}
+}
