@@ -8,16 +8,16 @@ import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
+import org.mati.geotech.layers.GTLayer;
+import org.mati.geotech.layers.GUILayer;
+import org.mati.geotech.layers.GeoGridLayer;
+import org.mati.geotech.layers.LineObjectLayer;
+import org.mati.geotech.layers.MapLayer;
+import org.mati.geotech.layers.ObjectsLayer;
+import org.mati.geotech.layers.TextLayer;
 import org.mati.geotech.model.ResManager;
 import org.mati.geotech.model.ResManagerListener;
 
-import layers.GTLayer;
-import layers.LineObjectLayer;
-import layers.MapLayer;
-import layers.ObjectsLayer;
-import layers.TextLayer;
-import layers.GUILayer;
-import layers.GeoGridLayer;
 
 public class GTCanvas extends GLCanvas implements GLEventListener, ResManagerListener {
 	private Vector<GTLayer> _layers = new Vector<GTLayer>();

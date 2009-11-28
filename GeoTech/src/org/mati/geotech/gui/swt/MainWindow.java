@@ -9,13 +9,6 @@ import javax.media.opengl.GLContext;
 import javax.media.opengl.GLDrawableFactory;
 import javax.media.opengl.glu.GLU;
 
-import layers.GTLayer;
-import layers.GUILayer;
-import layers.GeoGridLayer;
-import layers.LineObjectLayer;
-import layers.MapLayer;
-import layers.ObjectsLayer;
-import layers.TextLayer;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
@@ -30,6 +23,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.mati.geotech.gui.ViewPort;
+import org.mati.geotech.layers.GTLayer;
+import org.mati.geotech.layers.GUILayer;
+import org.mati.geotech.layers.GeoGridLayer;
+import org.mati.geotech.layers.LineObjectLayer;
+import org.mati.geotech.layers.MapLayer;
+import org.mati.geotech.layers.ObjectsLayer;
+import org.mati.geotech.layers.TextLayer;
 import org.mati.geotech.model.ResManager;
 import org.mati.geotech.model.ResManagerListener;
 
