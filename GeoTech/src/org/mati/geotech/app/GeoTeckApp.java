@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -25,8 +22,8 @@ public class GeoTeckApp {
 	public static void main(String[] args) {		
 
 		// init log subsystem
-		BasicConfigurator.configure();
-		Logger.getRootLogger().setLevel(Level.ERROR);
+//		BasicConfigurator.configure();
+//		Logger.getRootLogger().setLevel(Level.ERROR);
 		
 		
 		try {
@@ -35,9 +32,10 @@ public class GeoTeckApp {
 			try {
 				new File(confName).createNewFile();
 			} catch (IOException e1) {
-				Logger.getRootLogger().error("config error: "+e1.getMessage());
+//				Logger.getRootLogger().error("config error: "+e1.getMessage());
+				e1.printStackTrace();
 			}
-			Logger.getRootLogger().error("config error: "+e.getMessage());
+//			Logger.getRootLogger().error("config error: "+e.getMessage());
 		}
 		
 		Display display = new Display();

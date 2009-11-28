@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Properties;
@@ -23,13 +22,11 @@ import org.mati.geotech.utils.URLUTF8Encoder;
 import org.mati.geotech.utils.config.Config;
 import org.mati.geotech.utils.config.ConfigUser;
 
-
-
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureData;
 import com.sun.opengl.util.texture.TextureIO;
 
-public class ResManager implements TextureProcListener, ObjectLoaderListener, CellCoverListener, ConfigUser {
+public class ResManager implements TextureProcListener, CellCoverListener, ConfigUser {
 	
 	public enum MapSource {
 		GOOGLE,
@@ -41,7 +38,6 @@ public class ResManager implements TextureProcListener, ObjectLoaderListener, Ce
 	private MapSource _curMapSrc = MapSource.VIRTUAL_EARTH_ALL; 
 		
 	private TextureProc _texProc;
-	private ObjectLoader _objLoader = new ObjectLoader();
 	private int _cacheLvls=3;
 	private HashMap<String, Texture> _texsActive[];
 
@@ -290,8 +286,6 @@ public class ResManager implements TextureProcListener, ObjectLoaderListener, Ce
 
 	public void init() throws Exception {
 		loadTextures();
-		_objLoader.addListner(this);
-		_objLoader.start();
 	}
 
 	public Vector<String> getPathsFor(Rect cell, int lvl) {
@@ -345,7 +339,6 @@ public class ResManager implements TextureProcListener, ObjectLoaderListener, Ce
 	public void downloadComplite(String name) {
 		for(ResManagerListener rm : _rmi) rm.stateChanged();
 	}
-	public void loadObjects() { _objLoader.getObjects(); }
 
 	public LinkedList<GeoObject> getObjects(Rect w) { return getObjects(w, _objFilter); }
 	
@@ -358,19 +351,6 @@ public class ResManager implements TextureProcListener, ObjectLoaderListener, Ce
 				result.addAll(_objTrees[i].select(w));
 		}
 		return result;
-	}
-	@Override
-	public void recvObjectIdList(Vector<Integer> oid) {
-		for(Integer id: oid)
-			_objLoader.loadObject(id);		
-	}
-
-	@Override
-	public void recvObject(GeoObject gobj) {
-		int slvl = gobj.getStartLvl();
-		_objTrees[slvl].addElement(gobj);
-		// System.out.println("new obj: "+gobj.getId()+" name: "+gobj.getName()+" lon: "+gobj.getX()+" lat: "+gobj.getY());
-		for(ResManagerListener rm : _rmi) rm.stateChanged();
 	}
 
 	public Texture getObjTexture(int type) {
