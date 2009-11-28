@@ -4,11 +4,12 @@ import java.util.LinkedList;
 
 import javax.media.opengl.GL;
 
-import gui.ViewPort;
-import model.GeoObject;
-import model.GeoPoint;
-import model.Rect;
-import model.ResManager;
+import org.mati.geotech.gui.ViewPort;
+import org.mati.geotech.model.GeoObject;
+import org.mati.geotech.model.GeoPoint;
+import org.mati.geotech.model.Rect;
+import org.mati.geotech.model.ResManager;
+
 
 public class LineObjectLayer extends GTLayer {
 	public LineObjectLayer(ResManager res, ViewPort vp) { super(res, vp); }

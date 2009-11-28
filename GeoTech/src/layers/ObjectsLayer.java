@@ -1,6 +1,5 @@
 package layers;
 
-import gui.ViewPort;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +9,10 @@ import java.util.Scanner;
 import javax.media.opengl.GL;
 
 import org.apache.log4j.Logger;
+import org.mati.geotech.gui.ViewPort;
+import org.mati.geotech.model.GeoObject;
+import org.mati.geotech.model.Rect;
+import org.mati.geotech.model.ResManager;
 import org.xml.sax.SAXException;
 
 import com.keithpower.gekmlib.Folder;
@@ -19,9 +22,6 @@ import com.keithpower.gekmlib.Placemark;
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureCoords;
 
-import model.GeoObject;
-import model.Rect;
-import model.ResManager;
 
 public class ObjectsLayer extends TextLayer {
 	

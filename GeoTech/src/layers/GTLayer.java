@@ -1,10 +1,11 @@
 package layers;
 
-import gui.ViewPort;
 
 import javax.media.opengl.GL;
 
-import model.ResManager;
+import org.mati.geotech.gui.ViewPort;
+import org.mati.geotech.model.ResManager;
+
 
 public class GTLayer {
 	ResManager _res;

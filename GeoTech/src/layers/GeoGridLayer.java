@@ -1,15 +1,16 @@
 package layers;
 
-import gui.ViewPort;
 
 import java.awt.geom.Point2D;
 
 import javax.media.opengl.GL;
 
+import org.mati.geotech.gui.ViewPort;
+import org.mati.geotech.model.ResManager;
+
 import com.jhlabs.map.MapMath;
 import com.jhlabs.map.proj.Projection;
 
-import model.ResManager;
 
 public class GeoGridLayer extends GTLayer {
 

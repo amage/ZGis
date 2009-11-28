@@ -1,15 +1,16 @@
 package layers;
 
-import gui.ViewPort;
 
 import java.awt.Font;
 
 import javax.media.opengl.GL;
 
+import org.mati.geotech.gui.ViewPort;
+import org.mati.geotech.model.Rect;
+import org.mati.geotech.model.ResManager;
+
 import com.sun.opengl.util.j2d.TextRenderer;
 
-import model.Rect;
-import model.ResManager;
 
 public class TextLayer extends GTLayer {
 	TextRenderer _textRender;

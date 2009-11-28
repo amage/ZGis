@@ -1,6 +1,5 @@
 package layers;
 
-import gui.ViewPort;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,14 +9,16 @@ import java.util.Properties;
 
 import javax.media.opengl.GL;
 
+import org.mati.geotech.gui.ViewPort;
+import org.mati.geotech.model.Rect;
+import org.mati.geotech.model.ResManager;
+import org.mati.geotech.model.cellcover.CellCover;
+import org.mati.geotech.model.cellcover.CellCoverListener;
+import org.mati.geotech.model.cellcover.MapGridCellView;
+
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureCoords;
 
-import model.Rect;
-import model.ResManager;
-import model.cellcover.CellCover;
-import model.cellcover.CellCoverListener;
-import model.cellcover.MapGridCellView;
 
 public class MapLayer extends GTLayer implements CellCoverListener {
 	CellCover _cc = new CellCover();

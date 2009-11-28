@@ -1,14 +1,15 @@
 package layers;
 
-import gui.ViewPort;
 
 import java.awt.Font;
 
 import javax.media.opengl.GL;
 
+import org.mati.geotech.gui.ViewPort;
+import org.mati.geotech.model.ResManager;
+
 import com.sun.opengl.util.j2d.TextRenderer;
 
-import model.ResManager;
 
 public class GUILayer extends GTLayer {
 
