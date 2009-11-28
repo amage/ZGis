@@ -3,8 +3,6 @@ package org.mati.geotech.gui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Properties;
 
 import javax.swing.AbstractAction;
@@ -14,8 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import org.apache.log4j.Logger;
-import org.mati.geotech.app.GeoTeckApp;
 import org.mati.geotech.utils.config.Config;
 
 
@@ -86,12 +82,12 @@ public class ConfigPane extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				_conf.getProps().putAll(_tmpProps);
 				_conf.updateAll();
-				try {
-					_conf.save(new FileOutputStream(GeoTeckApp.confName));
-					Logger.getRootLogger().info("config saved");
-				} catch (IOException e1) {
-					Logger.getRootLogger().error(e1.getMessage());
-				}
+//				try {
+////					_conf.save(new FileOutputStream(GeoTeckApp.confName));
+//					Logger.getRootLogger().info("config saved");
+//				} catch (IOException e1) {
+//					Logger.getRootLogger().error(e1.getMessage());
+//				}
 			}
 		}));
 		

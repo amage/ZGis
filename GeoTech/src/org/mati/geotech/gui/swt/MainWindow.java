@@ -3,12 +3,10 @@ package org.mati.geotech.gui.swt;
 
 import java.util.Vector;
 
-
 import javax.media.opengl.GL;
 import javax.media.opengl.GLContext;
 import javax.media.opengl.GLDrawableFactory;
 import javax.media.opengl.glu.GLU;
-
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
@@ -28,7 +26,6 @@ import org.mati.geotech.layers.GUILayer;
 import org.mati.geotech.layers.GeoGridLayer;
 import org.mati.geotech.layers.LineObjectLayer;
 import org.mati.geotech.layers.MapLayer;
-import org.mati.geotech.layers.ObjectsLayer;
 import org.mati.geotech.layers.TextLayer;
 import org.mati.geotech.model.ResManager;
 import org.mati.geotech.model.ResManagerListener;

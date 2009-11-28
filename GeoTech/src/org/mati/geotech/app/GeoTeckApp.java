@@ -7,7 +7,11 @@ import java.io.IOException;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.mati.geotech.gui.GTMainFrame;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.mati.geotech.gui.swt.MainWindow;
 import org.mati.geotech.utils.config.Config;
 
 
@@ -35,8 +39,23 @@ public class GeoTeckApp {
 			}
 			Logger.getRootLogger().error("config error: "+e.getMessage());
 		}
-		GTMainFrame frame = new GTMainFrame();
-		frame.setVisible(true);
+		
+		Display display = new Display();
+		Shell shell = new Shell(display);
+		shell.setLayout(new FillLayout());
+		new MainWindow(shell,SWT.NONE);
+		shell.open();
+		
+		while(!shell.isDisposed()) {
+			if(!display.readAndDispatch())
+				display.sleep();
+		}
+		try {
+			display.dispose();
+		}
+		finally {
+			System.exit(0);
+		}
 	}
 
 }
