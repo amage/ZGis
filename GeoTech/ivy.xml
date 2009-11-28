@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0">
-    <info organisation="apache" module="geotech"/>
+    <info organisation="mati" module="geotech"/>
     <dependencies>
         <dependency org="commons-beanutils" name="commons-beanutils" rev="1.0"/>
     </dependencies>
