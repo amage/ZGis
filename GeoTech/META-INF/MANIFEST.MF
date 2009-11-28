@@ -3,5 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: GeoTech
 Bundle-SymbolicName: org.mati.geotech;singleton:=true
 Bundle-Version: 0.0.1.qualifier
-Bundle-ClassPath: GeoTech.jar,lib/commons-beanutils-bean-collections.jar,lib/commons-beanutils-core.jar,lib/commons-beanutils.jar,lib/commons-collections-3.1.jar,lib/commons-digester-1.8.jar,lib/commons-logging.jar,lib/gekmllib.jar,lib/gluegen-rt.jar,lib/javaconfig-1.4.jar,lib/javaproj-1.0.5.jar,lib/jogl.jar,lib/junit-4.4.jar,lib/log4j-1.2.15.jar,lib/RXTXcomm.jar,lib/Windows/swt.jar
+Bundle-ClassPath: GeoTech.jar,
+ lib/gluegen-rt.jar,
+ lib/javaproj-1.0.5.jar,
+ lib/jogl.jar
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.swt
+Bundle-Activator: GeoTechActivator
