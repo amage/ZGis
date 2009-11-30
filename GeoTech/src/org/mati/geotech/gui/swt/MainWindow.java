@@ -47,8 +47,8 @@ public class MainWindow extends Composite implements ResManagerListener {
 	
 	public ResManager getResManager() { return res; }
 	
-	public MainWindow(Composite perent, int flags) {
-		super(perent, flags);
+	public MainWindow(Composite parent, int flags) {
+		super(parent, flags);
 
 		setLayout(new FillLayout());
 		GLData data = new GLData();
