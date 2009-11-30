@@ -220,7 +220,12 @@ public class ResManager implements TextureProcListener, CellCoverListener, Confi
 			}
 		}
 
-		String syspath = Config.getInstance().getProperty("geotech.syspath", "./");
+		// FIXME: image path
+		
+		String syspath = Config.getInstance().getProperty("geotech.syspath", 
+		        "/home/yuriy/workspace-geotech/geotech/");
+		
+
 		_texLoading = TextureIO.newTexture(new File(syspath+"images/loading.png"), false);
 		_texNotAvailable = TextureIO.newTexture(new File(syspath+"images/notavailable.png"), false);
 		_texDownloading= TextureIO.newTexture(new File(syspath+"images/downloading.png"), false);

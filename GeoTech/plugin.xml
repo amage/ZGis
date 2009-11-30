@@ -21,5 +21,14 @@
             name="Map viewer">
       </perspective>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="org.mati.geotech.gui.views.MapView"
+            id="org.mati.geotech.mapview"
+            name="Map view"
+            restorable="true">
+      </view>
+   </extension>
 
 </plugin>
