@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         id="id1"
+         id="geotech"
          point="org.eclipse.core.runtime.applications">
       <application
             cardinality="singleton-global"
@@ -14,11 +14,12 @@
       </application>
    </extension>
    <extension
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="org.mati.geotech.ide"
-            name="GeoTech">
-      </product>
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.mati.geotech.app.PerspectiveFactory"
+            id="org.mati.geotech.mapViewPerspective"
+            name="Map viewer">
+      </perspective>
    </extension>
 
 </plugin>

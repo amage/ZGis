@@ -21,7 +21,7 @@ import com.sun.opengl.util.texture.TextureIO;
 
 public class TextureProc extends Thread implements DownloaderListener {
 	private boolean _canDownload = Boolean.parseBoolean(
-						Config.getInstance().getProperty("geoteck.can_download_maps","false"));
+						Config.getInstance().getProperty("geoteck.can_download_maps","true"));
 	private MapSource _mapType = MapSource.VIRTUAL_EARTH_ALL;
 	
 	public void setMapSourceType(MapSource ms) { 
