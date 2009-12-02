@@ -30,5 +30,17 @@
             restorable="true">
       </view>
    </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.mati.geotech.application"
+            name="GeoTech">
+         <property
+               name="appName"
+               value="GeoTech">
+         </property>
+      </product>
+   </extension>
 
 </plugin>
