@@ -3,31 +3,23 @@ package org.mati.geotech.model;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Properties;
-import java.util.Scanner;
 import java.util.Vector;
 
-import org.eclipse.swt.graphics.RGB;
 import org.mati.geotech.model.cellcover.CellCoverListener;
 import org.mati.geotech.model.cellcover.MapGridCellView;
 import org.mati.geotech.model.qmap.GoogleMapPathMaker;
 import org.mati.geotech.model.qmap.PathMaker;
 import org.mati.geotech.model.qmap.VirtualMapPathMaker;
 import org.mati.geotech.model.rtree.RTree;
-import org.mati.geotech.utils.URLUTF8Encoder;
 import org.mati.geotech.utils.config.Config;
-import org.mati.geotech.utils.config.ConfigUser;
 
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureData;
 import com.sun.opengl.util.texture.TextureIO;
 
-public class ResManager implements TextureProcListener, CellCoverListener, ConfigUser {
+public class ResManager implements TextureProcListener, CellCoverListener {
 	
 	public enum MapSource {
 		GOOGLE,
@@ -41,8 +33,6 @@ public class ResManager implements TextureProcListener, CellCoverListener, Confi
 	private TextureProc _texProc;
 	private int _cacheLvls=3;
 	private HashMap<String, Texture> _texsActive[];
-
-	private String _serverURL = Config.getInstance().getProperty("geoteck.object_server","http://127.0.0.1/");
 	
 	private Texture _texMatrix[][][];
 	private double _gsw = 0;
@@ -55,7 +45,6 @@ public class ResManager implements TextureProcListener, CellCoverListener, Confi
 	private Texture _texNotAvailable;
 	
 	private Vector<Texture> _objTexs = new Vector<Texture>();
-	private GeoObject newLineObject = new GeoObject();
 
 	private RTree _objTrees[] = new RTree[20];
 	
@@ -432,8 +421,4 @@ public class ResManager implements TextureProcListener, CellCoverListener, Confi
 	
 	public int getMapLvl() { return _lvl; }
 	
-	@Override
-	public void coufigChanged(Properties prop) {
-		_serverURL = Config.getInstance().getProperty("geoteck.object_server","http://127.0.0.1/");		
-	}
 }
