@@ -1,6 +1,7 @@
 package org.mati.geotech.model;
 
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -11,7 +12,7 @@ import java.util.Properties;
 import java.util.Scanner;
 import java.util.Vector;
 
-import org.mati.geotech.gui.ObjectCatalog;
+import org.eclipse.swt.graphics.RGB;
 import org.mati.geotech.model.cellcover.CellCoverListener;
 import org.mati.geotech.model.cellcover.MapGridCellView;
 import org.mati.geotech.model.qmap.GoogleMapPathMaker;
@@ -64,7 +65,6 @@ public class ResManager implements TextureProcListener, CellCoverListener, Confi
 	// Interaction stuff
 	private Vector<ResManagerListener> _rmi = new Vector<ResManagerListener>();
 
-	private ObjFilter _objFilter = new ObjFilter();
 	public void removeListner(ResManagerListener rmi) { _rmi.remove(rmi); }
 	public void addListner(ResManagerListener rmi) {_rmi.add(rmi); }
 	
@@ -225,10 +225,17 @@ public class ResManager implements TextureProcListener, CellCoverListener, Confi
 		String syspath = Config.getInstance().getProperty("geotech.syspath", 
 		        "/home/yuriy/workspace-geotech/geotech/");
 		
+		// Create black image data
+		BufferedImage blackImage= new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
+		blackImage.setRGB(0, 0, 0);
+		
 
-		_texLoading = TextureIO.newTexture(new File(syspath+"images/loading.png"), false);
-		_texNotAvailable = TextureIO.newTexture(new File(syspath+"images/notavailable.png"), false);
-		_texDownloading= TextureIO.newTexture(new File(syspath+"images/downloading.png"), false);
+//		_texLoading = TextureIO.newTexture(new File(syspath+"images/loading.png"), false);
+//		_texNotAvailable = TextureIO.newTexture(new File(syspath+"images/notavailable.png"), false);
+//		_texDownloading= TextureIO.newTexture(new File(syspath+"images/downloading.png"), false);
+		_texLoading= TextureIO.newTexture(blackImage,false);
+        _texNotAvailable= TextureIO.newTexture(blackImage,false);
+        _texDownloading= TextureIO.newTexture(blackImage,false);
 		
 		// obj textures load
 		boolean bExit = false;
@@ -345,26 +352,6 @@ public class ResManager implements TextureProcListener, CellCoverListener, Confi
 		for(ResManagerListener rm : _rmi) rm.stateChanged();
 	}
 
-	public LinkedList<GeoObject> getObjects(Rect w) { return getObjects(w, _objFilter); }
-	
-	public LinkedList<GeoObject> getObjects(Rect w, ObjFilter of) {
-		LinkedList<GeoObject> result = new LinkedList<GeoObject>();
-		for(int i=0; i <= _lvl; i++) {
-			if(of!=null)
-				result.addAll(of.filt(_objTrees[i].select(w)));
-			else
-				result.addAll(_objTrees[i].select(w));
-		}
-		return result;
-	}
-
-	public Texture getObjTexture(int type) {
-		if(type>=0 && type < _objTexs.size()) 
-			return _objTexs.get(type);
-		else
-			return _objTexs.get(0);
-	}
-
 	// CellCover listener
 	@Override
 	public void gridSizeChanged(int n, int m) {
@@ -444,57 +431,9 @@ public class ResManager implements TextureProcListener, CellCoverListener, Confi
 	}
 	
 	public int getMapLvl() { return _lvl; }
-	public void createObj(GeoObject go) throws IOException {
-		String req = _serverURL+"get.php?cmd=insert";
-		
-		for(String key: go.getProps().keySet())
-			req += "&"+URLUTF8Encoder.encode(key)+"="+URLUTF8Encoder.encode(go.getProps().get(key));
-		//System.out.println(req);
-		URL url = new URL(req);
-		URLConnection con = url.openConnection();
-		con.connect();
-		Scanner s = new Scanner(con.getInputStream());
-		if(s.hasNextLine()) {
-			String ans=s.nextLine();
-			if(!ans.equalsIgnoreCase("ok")) {
-				throw new IOException("Wrong server answer("+ans+")");
-			}
-			go.getProps().put("id", s.nextLine().trim());
-		}
-		else
-			throw new IOException("Wrong server answer");
-		
-		createObjPnts(go);
-	}
-	
-	private void createObjPnts(GeoObject go) throws IOException {		
-		for(GeoPoint p:go.getPoints()) {
-			String req = _serverURL+"get.php?cmd=insert_pnt&obj_id="+go.getId()+"&lat="+p.getLat()+"&lon="+p.getLon();
-			// System.out.println(req);
-			URL url = new URL(req);
-			URLConnection con = url.openConnection();
-			con.connect();
-			Scanner s = new Scanner(con.getInputStream());
-			if(s.hasNextLine()) {
-				String ans=s.nextLine();
-				if(!ans.equalsIgnoreCase("ok")) {
-					throw new IOException("Wrong server answer("+ans+")");
-				}
-			}
-			else
-				throw new IOException("Wrong server answer");
-
-		}
-	}
 	
 	@Override
 	public void coufigChanged(Properties prop) {
 		_serverURL = Config.getInstance().getProperty("geoteck.object_server","http://127.0.0.1/");		
-	}
-	public GeoObject getNewObjectLines() { return newLineObject; }
-	public void newLineObject() { newLineObject=new GeoObject(); }
-	public void setNewLineObject(GeoObject obj) { newLineObject=obj; }
-	public void setFilter(ObjectCatalog cat) {
-		_objFilter.setConfig(cat);
 	}
 }

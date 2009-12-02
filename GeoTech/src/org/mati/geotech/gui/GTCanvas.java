@@ -11,7 +11,6 @@ import javax.media.opengl.glu.GLU;
 import org.mati.geotech.layers.GTLayer;
 import org.mati.geotech.layers.GUILayer;
 import org.mati.geotech.layers.GeoGridLayer;
-import org.mati.geotech.layers.LineObjectLayer;
 import org.mati.geotech.layers.MapLayer;
 import org.mati.geotech.layers.TextLayer;
 import org.mati.geotech.model.ResManager;
@@ -39,7 +38,7 @@ public class GTCanvas extends GLCanvas implements GLEventListener, ResManagerLis
 		
 		_layers.add(new MapLayer(_res,_viewPort));
 		_layers.add(new GeoGridLayer(_res,_viewPort));
-		_layers.add(new LineObjectLayer(_res,_viewPort));
+//		_layers.add(new LineObjectLayer(_res,_viewPort));
 		_layers.add(new TextLayer(_res,_viewPort));
 		_layers.add(new GUILayer(_res,_viewPort));
 		

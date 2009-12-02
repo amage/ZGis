@@ -1,6 +1,5 @@
 package org.mati.geotech.app;
 
-import org.mati.geotech.gui.MainFrame;
 import org.mati.geotech.gui.method.RTreeDrawPanel;
 import org.mati.geotech.model.rtree.RTreeModel;
 

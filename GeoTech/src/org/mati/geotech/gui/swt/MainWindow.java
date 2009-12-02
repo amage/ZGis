@@ -24,13 +24,20 @@ import org.mati.geotech.gui.ViewPort;
 import org.mati.geotech.layers.GTLayer;
 import org.mati.geotech.layers.GUILayer;
 import org.mati.geotech.layers.GeoGridLayer;
-import org.mati.geotech.layers.LineObjectLayer;
 import org.mati.geotech.layers.MapLayer;
 import org.mati.geotech.layers.TextLayer;
 import org.mati.geotech.model.ResManager;
 import org.mati.geotech.model.ResManagerListener;
 
-public class MainWindow extends Composite implements ResManagerListener {
+public class MainWindow extends Composite {
+    
+    ResManagerListener dataUpdateListner= new ResManagerListener() {
+        @Override
+        public void stateChanged() {
+            repaint();
+        }
+    };
+    
 	private double mx=0;
 	private double my=0;
 	private double scrollSpeedX=0.001;
@@ -44,8 +51,6 @@ public class MainWindow extends Composite implements ResManagerListener {
 	private GLCanvas canvas;
 	
 	private boolean bDrag = false;
-	
-	public ResManager getResManager() { return res; }
 	
 	public MainWindow(Composite parent, int flags) {
 		super(parent, flags);
@@ -73,14 +78,13 @@ public class MainWindow extends Composite implements ResManagerListener {
 				repaint();
 			}
 		});
-		
 		res = new ResManager();
 		
-		res.addListner(this);
+		res.addListner(dataUpdateListner);
 		
 		layers.add(new MapLayer(res, vport));
 		layers.add(new GeoGridLayer(res, vport));
-		layers.add(new LineObjectLayer(res, vport));
+//		layers.add(new LineObjectLayer(res, vport));
 //		layers.add(new ObjectsLayer(res, vport));
 		layers.add(new TextLayer(res, vport));
 		layers.add(new GUILayer(res, vport));
@@ -181,10 +185,4 @@ public class MainWindow extends Composite implements ResManagerListener {
 			});
 		}
 	}
-	
-	@Override
-	public void stateChanged() {
-		repaint();
-	}
-
 }

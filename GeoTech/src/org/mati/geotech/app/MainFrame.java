@@ -1,4 +1,4 @@
-package org.mati.geotech.gui;
+package org.mati.geotech.app;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
