@@ -1,4 +1,4 @@
-package org.mati.geotech.gui.swt;
+package org.mati.geotech.gui;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLContext;
@@ -17,7 +17,6 @@ import org.eclipse.swt.opengl.GLData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
-import org.mati.geotech.gui.ViewPort;
 import org.mati.geotech.layers.AbstractMapLayer;
 import org.mati.geotech.layers.GUILayer;
 import org.mati.geotech.layers.GeoGridLayer;

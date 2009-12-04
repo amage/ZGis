@@ -49,8 +49,8 @@
       <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.mati.geotech"/>
-      <plugin id="org.mati.geotech.native.linux" fragment="true"/>
-      <plugin id="org.mati.geotech.native.linux64" fragment="true"/>
+      <plugin id="org.mati.geotech.native.linux.x86" fragment="true"/>
+      <plugin id="org.mati.geotech.native.linux.x86_64" fragment="true"/>
       <plugin id="org.mati.geotech.native.windows" fragment="true"/>
    </plugins>
 

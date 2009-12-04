@@ -3,7 +3,7 @@ package org.mati.geotech.gui.views;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
-import org.mati.geotech.gui.swt.MainWindow;
+import org.mati.geotech.gui.MainWindow;
 
 public class MapView extends ViewPart {
     public final static String ID= "org.mati.geotech.mapview";

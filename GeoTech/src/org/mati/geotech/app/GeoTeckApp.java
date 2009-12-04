@@ -8,7 +8,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.mati.geotech.gui.swt.MainWindow;
+import org.mati.geotech.gui.MainWindow;
 import org.mati.geotech.utils.config.Config;
 
 public class GeoTeckApp {
