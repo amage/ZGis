@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Windows
+Bundle-SymbolicName: org.mati.geotech.native.windows
+Bundle-Version: 1.0.0
+Fragment-Host: org.mati.geotech;bundle-version="0.0.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-PlatformFilter: (& (osgi.os=win32) (osgi.arch=x86))
