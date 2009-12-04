@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Linux64
+Bundle-SymbolicName: org.mati.geotech.native.linux64;singleton:=true
+Bundle-Version: 1.0.0
+Fragment-Host: org.mati.geotech;bundle-version="0.0.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-PlatformFilter: (& (osgi.os=linux) (osgi.arch=x86_64))
