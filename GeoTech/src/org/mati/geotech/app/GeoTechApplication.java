@@ -1,6 +1,5 @@
 package org.mati.geotech.app;
 
-
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.swt.widgets.Display;
@@ -9,23 +8,24 @@ import org.eclipse.ui.PlatformUI;
 
 public class GeoTechApplication implements IApplication {
 
-	@Override
-	public Object start(IApplicationContext context) throws Exception {
-	    Display display = PlatformUI.createDisplay();
-	    try {
-	        int returnCode =0; 
-	            PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor());
-	        if (returnCode == PlatformUI.RETURN_RESTART)
-	            return IApplication.EXIT_RESTART;
-	        else
-	            return IApplication.EXIT_OK;
-	    } finally {
-	        display.dispose();
-	    }
-	}
+    @Override
+    public Object start(IApplicationContext context) throws Exception {
+        Display display = PlatformUI.createDisplay();
+        try {
+            int returnCode = 0;
+            PlatformUI.createAndRunWorkbench(display,
+                    new ApplicationWorkbenchAdvisor());
+            if (returnCode == PlatformUI.RETURN_RESTART)
+                return IApplication.EXIT_RESTART;
+            else
+                return IApplication.EXIT_OK;
+        } finally {
+            display.dispose();
+        }
+    }
 
-	@Override
-	public void stop() {
+    @Override
+    public void stop() {
         final IWorkbench workbench = PlatformUI.getWorkbench();
         if (workbench == null)
             return;
@@ -36,6 +36,6 @@ public class GeoTechApplication implements IApplication {
                     workbench.close();
             }
         });
-	}
+    }
 
 }
