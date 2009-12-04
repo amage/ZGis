@@ -11,7 +11,7 @@ import org.mati.geotech.model.ResManager;
 import com.sun.opengl.util.j2d.TextRenderer;
 
 
-public class GUILayer extends GTLayer {
+public class GUILayer extends AbstractMapLayer {
 
 	TextRenderer _textRender;
 	public GUILayer(ResManager res, ViewPort vp) { 
@@ -21,15 +21,15 @@ public class GUILayer extends GTLayer {
 
 	@Override
 	public void paint(GL gl) {
-		_textRender.beginRendering((int)_vp.getScreenWidth(), (int)_vp.getScreenHeight());
+		_textRender.beginRendering((int)viewPort.getScreenWidth(), (int)viewPort.getScreenHeight());
 		_textRender.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		_textRender.draw("+", 
-				_vp.mapToScrX(_vp.getViewWorldX())+(int)_vp.getScreenWidth()/2, 
-				_vp.mapToScrY(_vp.getViewWorldY())+(int)_vp.getScreenHeight()/2);
-		_textRender.draw("lat: " + _vp.getMouseMapLat(), (int)_vp.getScreenWidth()-100, 18);
-		_textRender.draw("long: "+ _vp.getMouseMapLon(), (int)_vp.getScreenWidth()-100, 32);
+				viewPort.mapToScrX(viewPort.getViewWorldX())+(int)viewPort.getScreenWidth()/2, 
+				viewPort.mapToScrY(viewPort.getViewWorldY())+(int)viewPort.getScreenHeight()/2);
+		_textRender.draw("lat: " + viewPort.getMouseMapLat(), (int)viewPort.getScreenWidth()-100, 18);
+		_textRender.draw("long: "+ viewPort.getMouseMapLon(), (int)viewPort.getScreenWidth()-100, 32);
 		_textRender.endRendering();
 		
-		_vp.scrToMapX(0);
+		viewPort.scrToMapX(0);
 	}
 }

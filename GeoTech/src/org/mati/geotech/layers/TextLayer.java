@@ -12,7 +12,7 @@ import org.mati.geotech.model.ResManager;
 import com.sun.opengl.util.j2d.TextRenderer;
 
 
-public class TextLayer extends GTLayer {
+public class TextLayer extends AbstractMapLayer {
 	TextRenderer _textRender;
 	TextRenderer _textRenderBack;
 	

@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.mati.geotech.gui.ViewPort;
-import org.mati.geotech.layers.GTLayer;
+import org.mati.geotech.layers.AbstractMapLayer;
 import org.mati.geotech.layers.GUILayer;
 import org.mati.geotech.layers.GeoGridLayer;
 import org.mati.geotech.layers.MapLayer;
@@ -45,7 +45,7 @@ public class MainWindow extends Composite {
 	private double scrollSpeedZ=0.1;
 	
 	private ViewPort vport = new ViewPort();
-	private Vector<GTLayer> layers = new Vector<GTLayer>();
+	private Vector<AbstractMapLayer> layers = new Vector<AbstractMapLayer>();
 	private ResManager res;
 	private GLContext context;
 	private GLCanvas canvas;
@@ -73,7 +73,7 @@ public class MainWindow extends Composite {
 				context.makeCurrent();
 				GL gl = context.getGL();
 				gl.glViewport(event.x, event.y, bounds.width, bounds.height);
-				for(GTLayer l: layers) l.setSize(bounds.width, bounds.height);
+				for(AbstractMapLayer l: layers) l.setSize(bounds.width, bounds.height);
 				context.release();
 				repaint();
 			}
@@ -177,7 +177,7 @@ public class MainWindow extends Composite {
 									vport.getViewWorldX(), vport.getViewWorldY(),  0, 
 							 		0, -1,  0);
 					if(res!=null) {
-						for(GTLayer l: layers) l.paint(gl);
+						for(AbstractMapLayer l: layers) l.paint(gl);
 					}
 					canvas.swapBuffers();
 					context.release();

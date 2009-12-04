@@ -8,7 +8,7 @@ import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-import org.mati.geotech.layers.GTLayer;
+import org.mati.geotech.layers.AbstractMapLayer;
 import org.mati.geotech.layers.GUILayer;
 import org.mati.geotech.layers.GeoGridLayer;
 import org.mati.geotech.layers.MapLayer;
@@ -18,7 +18,7 @@ import org.mati.geotech.model.ResManagerListener;
 
 
 public class GTCanvas extends GLCanvas implements GLEventListener, ResManagerListener {
-	private Vector<GTLayer> _layers = new Vector<GTLayer>();
+	private Vector<AbstractMapLayer> _layers = new Vector<AbstractMapLayer>();
 	private ViewPort _viewPort;
 	private ResManager _res;
 	private FPSCounter _fps;
@@ -58,7 +58,7 @@ public class GTCanvas extends GLCanvas implements GLEventListener, ResManagerLis
 						_viewPort.getViewWorldX(), _viewPort.getViewWorldY(),  0, 
 				 		0, -1,  0);
 		if(_res!=null) {
-			for(GTLayer l: _layers) l.paint(gla.getGL());
+			for(AbstractMapLayer l: _layers) l.paint(gla.getGL());
 		}
 		long t1 = System.currentTimeMillis();
 		displayFPS(gla,t0,t1);
@@ -104,7 +104,7 @@ public class GTCanvas extends GLCanvas implements GLEventListener, ResManagerLis
 		_viewPort.setAspect(ww/hh*2);
 		_viewPort.getScreenRect().setGeometry(x, y, w, h);
 
-		for(GTLayer l: _layers) l.setSize(w, h);
+		for(AbstractMapLayer l: _layers) l.setSize(w, h);
 		repaint();
 	}
 

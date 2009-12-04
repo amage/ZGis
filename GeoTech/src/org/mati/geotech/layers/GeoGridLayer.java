@@ -12,7 +12,7 @@ import com.jhlabs.map.MapMath;
 import com.jhlabs.map.proj.Projection;
 
 
-public class GeoGridLayer extends GTLayer {
+public class GeoGridLayer extends AbstractMapLayer {
 
 	public GeoGridLayer(ResManager res, ViewPort vp) {
 		super(res, vp);
@@ -20,7 +20,7 @@ public class GeoGridLayer extends GTLayer {
 	
 	@Override
 	public void paint(GL gl) {
-		Projection pr = _vp.getProjection();
+		Projection pr = viewPort.getProjection();
 		double step = MapMath.degToRad(10);
 		gl.glEnable(GL.GL_LINE_STIPPLE);
 		gl.glDisable(GL.GL_LINE_SMOOTH);
