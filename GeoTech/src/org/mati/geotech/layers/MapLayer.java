@@ -1,11 +1,5 @@
 package org.mati.geotech.layers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
-
 import javax.media.opengl.GL;
 
 import org.mati.geotech.gui.ViewPort;
@@ -18,27 +12,14 @@ import org.mati.geotech.model.cellcover.MapGridCellView;
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureCoords;
 
-public class MapLayer extends AbstractMapLayer implements CellCoverListener {
+public class MapLayer extends AbstractMapLayer {
     CellCover cellCover = new CellCover();
-    Properties _objViews = new Properties();
-    MapGridCellView[][] _mapGrid = null;
+    MapGridCellView[][] mapGrid = null;
 
     public MapLayer(ResManager res, ViewPort vp) {
         super(res, vp);
         cellCover.addListner(resourceManager);
-        cellCover.addListner(this);
-        String fName = "views.cfg";
-        try {
-            _objViews.load(new FileInputStream(new File(fName)));
-        } catch (IOException e) {
-            try {
-                _objViews.store(new FileOutputStream(new File(fName)),
-                        "Object view configuration");
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            System.out.println(e.getMessage());
-        }
+        cellCover.addListner(coverListner);
     }
 
     @Override
@@ -49,14 +30,14 @@ public class MapLayer extends AbstractMapLayer implements CellCoverListener {
             e.printStackTrace();
         }
 
-        if (_mapGrid != null) {
+        if (mapGrid != null) {
             gl.glTexEnvi(GL.GL_TEXTURE_ENV, GL.GL_TEXTURE_ENV_MODE,
                     GL.GL_REPLACE);
             for (int i = 0; i < cellCover.getCellCountH(); i++) {
                 for (int j = 0; j < cellCover.getCellCountW(); j++) {
-                    if (_mapGrid[i][j]
+                    if (mapGrid[i][j]
                             .haveOverlap(new Rect(-180, -90, 360, 180)))
-                        drawCell(gl, _mapGrid[i][j]);
+                        drawCell(gl, mapGrid[i][j]);
                 }
             }
         }
@@ -112,18 +93,21 @@ public class MapLayer extends AbstractMapLayer implements CellCoverListener {
         return resourceManager.getMapTexture(resourceManager.makePathFor(cell));
     }
 
-    @Override
-    public void gridPositionChanged(double x, double y, double cw, double ch,
-            int n, int m) {
-    }
+    CellCoverListener coverListner= new CellCoverListener() {
+        @Override
+        public void gridPositionChanged(double x, double y, double cw, double ch,
+                int n, int m) {
+        }
 
-    @Override
-    public void gridSizeChanged(int n, int m) {
-        _mapGrid = cellCover.getGridMartix();
-    }
+        @Override
+        public void gridSizeChanged(int n, int m) {
+            mapGrid = cellCover.getGridMartix();
+        }
 
-    @Override
-    public void levelChanged(int newLvl, int prevLvl) {
-    }
+        @Override
+        public void levelChanged(int newLvl, int prevLvl) {
+        }
+    };
+    
 
 }
