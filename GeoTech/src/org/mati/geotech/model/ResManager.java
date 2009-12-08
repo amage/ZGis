@@ -1,21 +1,17 @@
 package org.mati.geotech.model;
 
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Vector;
 
 import org.mati.geotech.GeoTechActivator;
-import org.mati.geotech.app.GeoTechApplication;
 import org.mati.geotech.model.cellcover.CellCoverListener;
 import org.mati.geotech.model.cellcover.MapGridCellView;
 import org.mati.geotech.model.qmap.GoogleMapPathMaker;
 import org.mati.geotech.model.qmap.PathMaker;
 import org.mati.geotech.model.qmap.VirtualMapPathMaker;
-import org.mati.geotech.model.rtree.RTree;
-import org.mati.geotech.utils.config.Config;
 
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureData;
@@ -46,10 +42,6 @@ public class ResManager implements TextureProcListener, CellCoverListener {
 	private Texture _texDownloading;
 	private Texture _texNotAvailable;
 	
-	private Vector<Texture> _objTexs = new Vector<Texture>();
-
-	private RTree _objTrees[] = new RTree[20];
-	
 	private int _lvl = 1;
 	private Rect _cacheRect = new Rect(0,0,0,0);
 
@@ -67,10 +59,6 @@ public class ResManager implements TextureProcListener, CellCoverListener {
 		_texsActive[1] = new HashMap<String, Texture>();
 		_texsActive[2] = new HashMap<String, Texture>();
 		_map.setSameGeometry(new Rect(-180,-90,360,180));
-		for(int i = 0; i < _objTrees.length; i++) {
-			_objTrees[i] = new RTree();
-		}
-		
 		_texMatrix = new Texture[3][][];
 	}
 	
@@ -210,13 +198,6 @@ public class ResManager implements TextureProcListener, CellCoverListener {
 				_texsActive[i].put(str, getMapTexture(str));
 			}
 		}
-
-		// FIXME: image path
-		
-		// Create black image data
-		BufferedImage blackImage= new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
-		blackImage.setRGB(0, 0, 0);
-		
 
 		_texLoading = TextureIO.newTexture(new File(GeoTechActivator.getDefault().getPath("images/downloading.png")), false);
 		_texNotAvailable = TextureIO.newTexture(new File(GeoTechActivator.getDefault().getPath("images/error.png")), false);

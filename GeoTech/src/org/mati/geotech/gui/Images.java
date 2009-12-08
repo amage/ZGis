@@ -1,7 +1,8 @@
 package org.mati.geotech.gui;
 
-import javax.swing.ImageIcon;
 import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 public class Images {
 	public static Image getImageFree(String fullName) {

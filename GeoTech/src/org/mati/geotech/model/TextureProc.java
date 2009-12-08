@@ -14,8 +14,6 @@ import org.mati.geotech.model.qmap.MapDownloader;
 import org.mati.geotech.model.qmap.VEMapDownloader;
 import org.mati.geotech.utils.config.Config;
 
-
-
 import com.sun.opengl.util.texture.TextureData;
 import com.sun.opengl.util.texture.TextureIO;
 
