@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Vector;
 
+import org.mati.geotech.GeoTechActivator;
+import org.mati.geotech.app.GeoTechApplication;
 import org.mati.geotech.model.cellcover.CellCoverListener;
 import org.mati.geotech.model.cellcover.MapGridCellView;
 import org.mati.geotech.model.qmap.GoogleMapPathMaker;
@@ -211,36 +213,15 @@ public class ResManager implements TextureProcListener, CellCoverListener {
 
 		// FIXME: image path
 		
-		String syspath = Config.getInstance().getProperty("geotech.syspath", 
-		        "/home/yuriy/workspace-geotech/geotech/");
-		
 		// Create black image data
 		BufferedImage blackImage= new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
 		blackImage.setRGB(0, 0, 0);
 		
 
-//		_texLoading = TextureIO.newTexture(new File(syspath+"images/loading.png"), false);
-//		_texNotAvailable = TextureIO.newTexture(new File(syspath+"images/notavailable.png"), false);
-//		_texDownloading= TextureIO.newTexture(new File(syspath+"images/downloading.png"), false);
-		_texLoading= TextureIO.newTexture(blackImage,false);
-        _texNotAvailable= TextureIO.newTexture(blackImage,false);
-        _texDownloading= TextureIO.newTexture(blackImage,false);
+		_texLoading = TextureIO.newTexture(new File(GeoTechActivator.getDefault().getPath("images/downloading.png")), false);
+		_texNotAvailable = TextureIO.newTexture(new File(GeoTechActivator.getDefault().getPath("images/error.png")), false);
+		_texDownloading = TextureIO.newTexture(new File(GeoTechActivator.getDefault().getPath("images/downloading.png")), false);
 		
-		// obj textures load
-		boolean bExit = false;
-		int i=0;
-		while(!bExit) {
-			File f = new File(syspath+"objs/o"+i+".png");
-			
-			if(f.isFile()) {
-				Texture t = TextureIO.newTexture(f,false);
-				_objTexs.add(t);
-				i++;
-			} 
-			else {
-				bExit=true;
-			}
-		}
 	}
 	
 		

@@ -1,5 +1,8 @@
 package org.mati.geotech;
 
+import java.io.IOException;
+
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -34,6 +37,10 @@ public class GeoTechActivator extends AbstractUIPlugin {
      */
     public static GeoTechActivator getDefault() {
         return plugin;
+    }
+    
+    public String getPath(String string) throws IOException {
+        return FileLocator.toFileURL(this.getBundle().getResource(string)).getFile();
     }
 
     /**
