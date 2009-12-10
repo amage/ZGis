@@ -6,6 +6,5 @@
 	<classpathentry exported="true" kind="lib" path="lib/gluegen-rt.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/javaproj-1.0.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jogl.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -2,9 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: GeoTech
 Bundle-SymbolicName: org.mati.geotech;singleton:=true
-Bundle-Version: 0.0.1
-Bundle-ClassPath: GeoTech.jar,
- lib/gluegen-rt.jar,
+Bundle-Version: 0.0.2
+Bundle-ClassPath: lib/gluegen-rt.jar,
  lib/javaproj-1.0.5.jar,
  lib/jogl.jar,
  .
