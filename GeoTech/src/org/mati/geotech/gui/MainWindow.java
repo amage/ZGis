@@ -118,6 +118,7 @@ public class MainWindow extends Composite {
         canvas.addMouseListener(new MouseListener() {
             @Override
             public void mouseDoubleClick(MouseEvent arg0) {
+            	// TODO: zoom in map
             }
 
             @Override
