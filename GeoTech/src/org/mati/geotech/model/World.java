@@ -13,6 +13,10 @@ public class World extends Rect {
         super(-180, -90, 360, 180);
     }
 
+    public World(double x0, double y0, double x, double y) {
+        super(x0, y0, x0-x, y0-y);
+    }
+
     public List<AbstractMapLayer> getLayers() {
         return layers;
     }

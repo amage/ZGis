@@ -28,6 +28,59 @@ import org.mati.geotech.model.World;
 
 public class MainWindow extends Composite {
 
+    private final class GMouseWheelListener implements MouseWheelListener {
+        @Override
+        public void mouseScrolled(MouseEvent event) {
+            scrollSpeedZ = 0.05 * Math.abs(vport.getZ());
+            vport.translateInMap(0, 0, event.count * scrollSpeedZ);
+            repaint();
+        }
+    }
+
+    private final class GMouseListener implements MouseListener {
+        @Override
+        public void mouseDoubleClick(MouseEvent arg0) {
+        	// TODO: zoom in map
+        }
+
+        @Override
+        public void mouseDown(MouseEvent event) {
+            if (event.button == 1) {
+                bDrag = true;
+                mx = event.x;
+                my = event.y;
+            }
+        }
+
+        @Override
+        public void mouseUp(MouseEvent event) {
+            if (event.button == 1) {
+                bDrag = false;
+            }
+        }
+    }
+
+    private final class GMouseMoveListener implements MouseMoveListener {
+        @Override
+        public void mouseMove(MouseEvent event) {
+            double x = event.x;
+            double y = event.y;
+            if (bDrag) {
+                scrollSpeedX = vport.getViewWorldWidth()
+                        / canvas.getSize().x;
+                scrollSpeedY = vport.getViewWorldHeight()
+                        / canvas.getSize().y;
+
+                vport.translateInMap((mx - x) * scrollSpeedX, (my - y)
+                        * scrollSpeedY, 0);
+                mx = event.x;
+                my = event.y;
+            }
+            vport.setMousePos(x, y);
+            repaint();
+        }
+    }
+
     ResManagerListener dataUpdateListner = new ResManagerListener() {
         @Override
         public void stateChanged() {
@@ -46,7 +99,7 @@ public class MainWindow extends Composite {
     private GLContext context;
     private GLCanvas canvas;
 
-    private World world= new World();
+    private World world= new World(37.24, 55.45, 38, 56);
 
     private boolean bDrag = false;
 
@@ -106,58 +159,12 @@ public class MainWindow extends Composite {
             System.exit(1);
         }
 
-        addMouseWheelListener(new MouseWheelListener() {
-            @Override
-            public void mouseScrolled(MouseEvent event) {
-                scrollSpeedZ = 0.05 * Math.abs(vport.getZ());
-                vport.translateInMap(0, 0, event.count * scrollSpeedZ);
-                repaint();
-            }
-        });
-
-        canvas.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseDoubleClick(MouseEvent arg0) {
-            	// TODO: zoom in map
-            }
-
-            @Override
-            public void mouseDown(MouseEvent event) {
-                if (event.button == 1) {
-                    bDrag = true;
-                    mx = event.x;
-                    my = event.y;
-                }
-            }
-
-            @Override
-            public void mouseUp(MouseEvent event) {
-                if (event.button == 1) {
-                    bDrag = false;
-                }
-            }
-        });
-
-        canvas.addMouseMoveListener(new MouseMoveListener() {
-            @Override
-            public void mouseMove(MouseEvent event) {
-                double x = event.x;
-                double y = event.y;
-                if (bDrag) {
-                    scrollSpeedX = vport.getViewWorldWidth()
-                            / canvas.getSize().x;
-                    scrollSpeedY = vport.getViewWorldHeight()
-                            / canvas.getSize().y;
-
-                    vport.translateInMap((mx - x) * scrollSpeedX, (my - y)
-                            * scrollSpeedY, 0);
-                    mx = event.x;
-                    my = event.y;
-                }
-                vport.setMousePos(x, y);
-                repaint();
-            }
-        });
+        addMouseWheelListener(new GMouseWheelListener());
+        canvas.addMouseListener(new GMouseListener());
+        canvas.addMouseMoveListener(new GMouseMoveListener());
+        
+        vport.setViewWorldX(vport.mapToWorldX(world.getX()-world.getWidth()/2));
+        vport.setViewWorldY(vport.mapToWorldY(world.getY()-world.getHeight()/2));
     }
 
     private void repaint() {
@@ -168,7 +175,6 @@ public class MainWindow extends Composite {
                     canvas.setCurrent();
                     context.makeCurrent();
                     GL gl = context.getGL();
-                    // System.out.println("Paint");
                     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_ACCUM_BUFFER_BIT
                             | GL.GL_STENCIL_BUFFER_BIT);
                     gl.glMatrixMode(GL.GL_PROJECTION);
