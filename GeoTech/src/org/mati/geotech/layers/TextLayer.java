@@ -12,12 +12,14 @@ import org.mati.geotech.model.ResManager;
 import com.sun.opengl.util.j2d.TextRenderer;
 
 
-public class TextLayer extends AbstractMapLayer {
+public class TextLayer extends AbstractLayer {
 	TextRenderer _textRender;
 	TextRenderer _textRenderBack;
+    protected ResManager resourceManager;
 	
 	public TextLayer(ResManager res, ViewPort vp) {
-		super(res, vp);
+		super(vp);
+		resourceManager = res;
 		_textRender = new TextRenderer(new Font("SansSerif", Font.BOLD, 14));
 		_textRenderBack = new TextRenderer(new Font("SansSerif", Font.BOLD, 14));
 	}

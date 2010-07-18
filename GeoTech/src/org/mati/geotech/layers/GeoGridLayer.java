@@ -10,10 +10,13 @@ import org.mati.geotech.model.ResManager;
 import com.jhlabs.map.MapMath;
 import com.jhlabs.map.proj.Projection;
 
-public class GeoGridLayer extends AbstractMapLayer {
+public class GeoGridLayer extends AbstractLayer {
+
+    protected ResManager resourceManager;
 
     public GeoGridLayer(ResManager res, ViewPort vp) {
-        super(res, vp);
+        super(vp);
+        resourceManager= res;
     }
 
     @Override

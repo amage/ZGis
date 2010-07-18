@@ -3,16 +3,13 @@ package org.mati.geotech.layers;
 import javax.media.opengl.GL;
 
 import org.mati.geotech.gui.ViewPort;
-import org.mati.geotech.model.ResManager;
 
-public abstract class AbstractMapLayer {
-    protected ResManager resourceManager;
+public abstract class AbstractLayer {
     protected ViewPort viewPort;
     private int layerWidth = 1;
     private int layerHeight = 1;
 
-    public AbstractMapLayer(ResManager res, ViewPort vp) {
-        resourceManager = res;
+    public AbstractLayer(ViewPort vp) {
         viewPort = vp;
     }
 

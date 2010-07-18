@@ -5,6 +5,7 @@ import javax.media.opengl.GL;
 import org.mati.geotech.gui.ViewPort;
 import org.mati.geotech.model.Rect;
 import org.mati.geotech.model.ResManager;
+import org.mati.geotech.model.ResManager.MapSource;
 import org.mati.geotech.model.cellcover.CellCover;
 import org.mati.geotech.model.cellcover.CellCoverListener;
 import org.mati.geotech.model.cellcover.MapGridCellView;
@@ -12,11 +13,13 @@ import org.mati.geotech.model.cellcover.MapGridCellView;
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureCoords;
 
-public class MapLayer extends AbstractLayer {
-    CellCover cellCover = new CellCover();
-    MapGridCellView[][] mapGrid = null;
+public class MSMapLayer extends AbstractLayer {
+    private CellCover cellCover = new CellCover();
+    private MapGridCellView[][] mapGrid = null;
+    private Rect world = new Rect(-180, -90, 360, 180);
+    private ResManager resourceManager;;
 
-    public MapLayer(ResManager res, ViewPort vp) {
+    public MSMapLayer(ResManager res, ViewPort vp) {
         super(vp);
         resourceManager = res;
         cellCover.addListner(resourceManager);
@@ -25,12 +28,12 @@ public class MapLayer extends AbstractLayer {
 
     @Override
     public void paint(GL gl) {
-        try {
-            updateMapGrid();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        cellCover.setViewWindow(
+                viewPort.getViewWorldX() - viewPort.getViewWorldWidth() / 2,
+                viewPort.getViewWorldY() - viewPort.getViewWorldHeight() / 2,
+                viewPort.getViewWorldWidth(), viewPort.getViewWorldHeight(),
+                getScreenWidth() / viewPort.getViewWorldWidth(),
+                getScreenHeight() / viewPort.getViewWorldHeight());
         if (mapGrid != null) {
             gl.glTexEnvi(GL.GL_TEXTURE_ENV, GL.GL_TEXTURE_ENV_MODE,
                     GL.GL_REPLACE);
@@ -42,14 +45,6 @@ public class MapLayer extends AbstractLayer {
                 }
             }
         }
-    }
-
-    private void updateMapGrid() {
-        cellCover.setViewWindow(viewPort.getViewWorldX() - viewPort.getViewWorldWidth() / 2,
-                viewPort.getViewWorldY() - viewPort.getViewWorldHeight() / 2, viewPort
-                        .getViewWorldWidth(), viewPort.getViewWorldHeight(),
-                getScreenWidth() / viewPort.getViewWorldWidth(), getScreenHeight()
-                        / viewPort.getViewWorldHeight());
     }
 
     private void drawCell(GL gl, MapGridCellView cell) {
@@ -66,8 +61,8 @@ public class MapLayer extends AbstractLayer {
             gl.glVertex3d(cell.getX() + cell.getWidth(), cell.getY(), 0);
 
             gl.glTexCoord2d(tc.right(), tc.bottom());
-            gl.glVertex3d(cell.getX() + cell.getWidth(), cell.getY()
-                    + cell.getHeight(), 0);
+            gl.glVertex3d(cell.getX() + cell.getWidth(),
+                    cell.getY() + cell.getHeight(), 0);
 
             gl.glTexCoord2d(tc.left(), tc.bottom());
             gl.glVertex3d(cell.getX(), cell.getY() + cell.getHeight(), 0);
@@ -83,15 +78,16 @@ public class MapLayer extends AbstractLayer {
             gl.glBegin(GL.GL_LINE_LOOP);
             gl.glVertex2d(cell.getX(), cell.getY());
             gl.glVertex2d(cell.getX(), cell.getY() + cell.getHeight());
-            gl.glVertex2d(cell.getX() + cell.getWidth(), cell.getY()
-                    + cell.getHeight());
+            gl.glVertex2d(cell.getX() + cell.getWidth(),
+                    cell.getY() + cell.getHeight());
             gl.glVertex2d(cell.getX() + cell.getWidth(), cell.getY());
             gl.glEnd();
         }
     }
 
     private Texture getTexture(MapGridCellView cell) throws Exception {
-        return resourceManager.getMapTexture(resourceManager.makePathFor(cell));
+        return resourceManager.getMapTexture(ResManager.selectPathMaker(
+                MapSource.VIRTUAL_EARTH_PHOTO).makePathFor(cell, world));
     }
 
     private CellCoverListener coverListner= new CellCoverListener() {
@@ -109,7 +105,4 @@ public class MapLayer extends AbstractLayer {
         public void levelChanged(int newLvl, int prevLvl) {
         }
     };
-    protected ResManager resourceManager;
-    
-
 }

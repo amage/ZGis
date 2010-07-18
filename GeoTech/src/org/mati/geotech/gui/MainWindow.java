@@ -17,10 +17,10 @@ import org.eclipse.swt.opengl.GLData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
-import org.mati.geotech.layers.AbstractMapLayer;
+import org.mati.geotech.layers.AbstractLayer;
 import org.mati.geotech.layers.GUILayer;
 import org.mati.geotech.layers.GeoGridLayer;
-import org.mati.geotech.layers.MapLayer;
+import org.mati.geotech.layers.MSMapLayer;
 import org.mati.geotech.layers.TextLayer;
 import org.mati.geotech.model.ResManager;
 import org.mati.geotech.model.ResManagerListener;
@@ -126,17 +126,18 @@ public class MainWindow extends Composite {
                 context.makeCurrent();
                 GL gl = context.getGL();
                 gl.glViewport(event.x, event.y, bounds.width, bounds.height);
-                for (AbstractMapLayer l : world.getLayers())
+                for (AbstractLayer l : world.getLayers())
                     l.setSize(bounds.width, bounds.height);
                 context.release();
                 repaint();
             }
         });
+
         res = new ResManager();
 
         res.addListner(dataUpdateListner);
 
-        world.getLayers().add(new MapLayer(res, vport));
+        world.getLayers().add(new MSMapLayer(res, vport));
         world.getLayers().add(new GeoGridLayer(res, vport));
         world.getLayers().add(new TextLayer(res, vport));
         world.getLayers().add(new GUILayer(res, vport));
@@ -186,7 +187,7 @@ public class MainWindow extends Composite {
                             -vport.getZ(), vport.getViewWorldX(), vport
                                     .getViewWorldY(), 0, 0, -1, 0);
                     if (res != null) {
-                        for (AbstractMapLayer l : world.getLayers())
+                        for (AbstractLayer l : world.getLayers())
                             l.paint(gl);
                     }
                     canvas.swapBuffers();
