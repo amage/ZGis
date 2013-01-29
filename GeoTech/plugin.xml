@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="org.mati.geotech.application"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="org.mati.geotech.app.GeoTechApplication">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.mati.geotech.app.PerspectiveFactory"
+            id="org.mati.geotech.mapViewPerspective"
+            name="Map viewer">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="org.mati.geotech.gui.views.MapView"
+            id="org.mati.geotech.mapview"
+            name="Map view"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.mati.geotech.application"
+            name="GeoTech">
+         <property
+               name="appName"
+               value="GeoTech">
+         </property>
+      </product>
+   </extension>
+
+</plugin>
